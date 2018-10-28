@@ -20,7 +20,7 @@ class ChatListItem extends React.Component<ChatListItemProps> {
           <View style={styles.lastMessage}>
             <Text
               style={[styles.message]}
-              numberOfLines={1}
+              numberOfLines={2}
               ellipsizeMode="tail"
             >
               {chat.messages[chat.messages.length - 1].message}
