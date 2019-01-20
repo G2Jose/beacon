@@ -19,6 +19,6 @@ const ProfileImage = ({
       style={{ width: size, height: size, borderRadius: size / 2 }}
     />
   </View>
-  )
+)
 
 export default ProfileImage

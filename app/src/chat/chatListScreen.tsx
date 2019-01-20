@@ -4,7 +4,6 @@ import { View, ScrollView } from 'react-native'
 import faker from 'faker'
 import { ChatList } from '~/chat/types'
 import ChatListItem from '~/chat/chatListItem'
-import { ReduxState } from '~/store/types'
 
 const fakeData: ChatList = {
   chats: Array(10)
@@ -18,7 +17,7 @@ const fakeData: ChatList = {
     })),
 }
 
-const mapStateToProps = (state: ReduxState) => ({
+const mapStateToProps = () => ({
   chatList: fakeData,
 })
 

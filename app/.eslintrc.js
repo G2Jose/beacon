@@ -158,7 +158,7 @@ module.exports = {
   overrides: [
     {
       files: ['src/**/*.ts', 'src/**/*.tsx'],
-      parser: 'typescript-eslint-parser',
+      parser: '@typescript-eslint/parser',
       rules: {
         'no-undef': 'off',
         'typescript/no-unused-vars': 'error',
