@@ -23,6 +23,9 @@ module.exports = {
         extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
       },
     },
+    'react': {
+      "version": "detect"
+    }
   },
   rules: {
     'no-console': [

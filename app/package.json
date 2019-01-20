@@ -5,7 +5,10 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "lint": "eslint \"**/*.js\" \"**/*.ts\" \"**/*.tsx\" && prettier-eslint \"src/**/*.js\" \"src/**/*.ts\" \"src/**/*.tsx\" --list-different",
+    "lint": "npm run lint:eslint && npm run lint:formatting && npm run lint:types",
+    "lint:eslint": "eslint \"**/*.js\" \"**/*.ts\" \"**/*.tsx\"",
+    "lint:formatting": "prettier-eslint \"src/**/*.js\" \"src/**/*.ts\" \"src/**/*.tsx\" --list-different",
+    "lint:types": "tsc --noEmit",
     "format": "prettier-eslint --write \"**/*.js\" \"**/*.ts\" \"**/*.tsx\""
   },
   "dependencies": {
@@ -27,20 +30,19 @@
     "prettier-eslint-cli": "^4.7.1",
     "react": "16.6.0-alpha.8af6728",
     "react-native": "0.57.3",
-    "react-navigation": "^2.18.0",
-    "react-navigation-redux-helpers": "^2.0.6",
+    "react-navigation": "^3.0.9",
+    "react-navigation-redux-helpers": "^2.0.9",
     "react-redux": "^5.0.7",
     "redux": "^4.0.1",
     "redux-actions": "^2.6.1",
     "redux-observable": "^1.0.0",
-    "rxjs": "^6.3.3",
-    "ts-jest": "^23.10.4"
+    "rxjs": "^6.3.3"
   },
   "devDependencies": {
     "@types/faker": "^4.1.4",
     "@types/react": "^16.4.18",
     "@types/react-native": "^0.57.7",
-    "@types/react-navigation": "^2.0.24",
+    "@types/react-navigation": "^3.0.1",
     "@types/redux-actions": "^2.3.1",
     "babel-jest": "23.6.0",
     "babel-plugin-module-resolver": "^3.1.1",
@@ -49,6 +51,7 @@
     "metro-react-native-babel-preset": "^0.48.1",
     "react-native-typescript-transformer": "^1.2.10",
     "react-test-renderer": "16.6.0-alpha.8af6728",
+    "ts-jest": "^23.10.5",
     "typescript": "^3.2.1"
   },
   "jest": {

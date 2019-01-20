@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.com/G2Jose/beacon.svg?branch=master)](https://travis-ci.com/G2Jose/beacon)

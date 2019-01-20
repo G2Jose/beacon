@@ -38,7 +38,9 @@ const mapStateToProps = (state: ReduxState) => ({
   state: state.navigation,
 })
 
-const AppWithNavigationState = connect(mapStateToProps)(reduxifiedNavigator)
+const AppWithNavigationState = connect(mapStateToProps)(
+  reduxifiedNavigator as any
+)
 
 export default AppWithNavigationState
 export { navigationMiddleware }

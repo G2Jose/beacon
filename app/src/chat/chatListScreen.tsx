@@ -11,8 +11,8 @@ const fakeData: ChatList = {
     .map(() => ({
       participants: [faker.name.findName(), faker.name.findName()],
       messages: [
-        { message: faker.lorem.sentence() },
-        { message: faker.lorem.sentence() },
+        { message: faker.lorem.sentence(), date: new Date(), from: '', to: '' },
+        { message: faker.lorem.sentence(), date: new Date(), from: '', to: '' },
       ],
     })),
 }
