@@ -1,9 +1,12 @@
 import React, { RefObject } from 'react'
-import { FlatList, View, StyleSheet } from 'react-native'
+import { FlatList, StyleSheet, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
 import faker from 'faker'
 import { createId, createMessage } from './factories'
 import Message from './message'
+import MessageInput from './input'
+import { Message as MessageType } from './types'
+import { isIphoneX } from '~/common/utils'
 
 const mapStateToProps = () => ({
   chat: {
@@ -18,44 +21,50 @@ const mapStateToProps = () => ({
 type ChatScreenProps = ReturnType<typeof mapStateToProps>
 
 class ChatScreen extends React.Component<ChatScreenProps> {
-  componentDidMount() {
-    // @TODO This is weird
-    this.timer = setTimeout(() => {
-      if (this.list.current) {
-        this.list.current.scrollToEnd()
-      }
-    }, 1000)
-  }
-
-  componentWillUnmount() {
-    if (this.timer) {
-      clearTimeout(this.timer)
-    }
-  }
-
   list: RefObject<FlatList<any>> = React.createRef()
 
-  timer?: number = 0
+  get data() {
+    return [...this.props.chat.messages, 'input']
+  }
+
+  renderItem = (item: MessageType | 'input') => {
+    if (item === 'input') {
+      return (
+        <MessageInput
+          style={[styles.input, isIphoneX() && styles.inputIphonxX]}
+        />
+      )
+    }
+    return <Message message={item.message} ours={item.ours} />
+  }
 
   render() {
-    const { chat } = this.props
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView
+        style={[styles.container]}
+        behavior="padding"
+        keyboardVerticalOffset={78}
+      >
         <FlatList
-          data={chat.messages}
-          renderItem={({ item }) => (
-            <Message message={item.message} ours={item.ours} />
-          )}
+          data={this.data}
+          renderItem={({ item }) => this.renderItem(item)}
           keyExtractor={(item, index) => `${index}`}
           ref={this.list}
+          onContentSizeChange={() => {
+            if (this.list.current) {
+              this.list.current.scrollToEnd({ animated: true })
+            }
+          }}
         />
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: { paddingHorizontal: 10 },
+  inputIphonxX: { marginBottom: 25 },
+  input: { marginTop: 10, paddingHorizontal: 7 },
 })
 
 export default connect(mapStateToProps)(ChatScreen)

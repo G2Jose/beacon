@@ -136,6 +136,7 @@ module.exports = {
     'react/no-unescaped-entities': 0,
     'react/prop-types': 1,
     'react/require-default-props': 1,
+    'react/destructuring-assignment': 0,
     'spaced-comment': 0,
     'wrap-iife': 0,
     'no-continue': 0,
