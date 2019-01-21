@@ -30,6 +30,7 @@
     "prettier-eslint-cli": "^4.7.1",
     "react": "16.6.0-alpha.8af6728",
     "react-native": "0.57.3",
+    "react-native-gesture-handler": "^1.0.12",
     "react-navigation": "^3.0.9",
     "react-navigation-redux-helpers": "^2.0.9",
     "react-redux": "^5.0.7",

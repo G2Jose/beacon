@@ -8,6 +8,7 @@ export interface Message {
 export interface Chat {
   participants: string[]
   messages: Message[]
+  id: string
 }
 
 export interface ChatList {

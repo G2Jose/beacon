@@ -1,4 +1,13 @@
-import { NavigationActions } from 'react-navigation'
+import {
+  NavigationActions,
+  // eslint-disable-next-line no-unused-vars
+  NavigationNavigateActionPayload,
+} from 'react-navigation'
 import { Route } from '~/navigation/types'
 
-export const routeTo = (route: Route) => NavigationActions.navigate(route as any)
+export type RouteParams = Pick<
+  NavigationNavigateActionPayload,
+  Exclude<keyof NavigationNavigateActionPayload, 'routeName'>
+>
+
+export const routeTo = (route: Route, params: RouteParams) => NavigationActions.navigate({ routeName: route, ...params })

@@ -8,7 +8,8 @@ import ChatListItem from '~/chat/chatListItem'
 const fakeData: ChatList = {
   chats: Array(10)
     .fill(null)
-    .map(() => ({
+    .map((_, i) => ({
+      id: `${i}`,
       participants: [faker.name.findName(), faker.name.findName()],
       messages: [
         { message: faker.lorem.sentence(), date: new Date(), from: '', to: '' },

@@ -23,9 +23,9 @@ module.exports = {
         extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
       },
     },
-    'react': {
-      "version": "detect"
-    }
+    react: {
+      version: '16.6',
+    },
   },
   rules: {
     'no-console': [
@@ -78,7 +78,7 @@ module.exports = {
     'react/sort-comp': [
       2,
       {
-        order: ['static-methods', 'lifecycle', 'render', 'everything-else'],
+        order: ['static-methods', 'lifecycle', 'everything-else', 'render'],
       },
     ],
     'react/prefer-stateless-function': 0,

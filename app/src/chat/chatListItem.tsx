@@ -1,19 +1,30 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Chat } from '~/chat/types'
 import ProfileImage from '~/profile/profileImage'
+import { routeTo } from '~/navigation/actions'
+import { connect } from 'react-redux'
 
-interface ChatListItemProps {
-  chat: Chat
+const mapDispatchToProps = {
+  routeToChat: (chat: Chat) => routeTo('ChatScreen', {
+      params: { id: chat.id, name: chat.participants[0] },
+    }),
 }
+
+type ChatListItemProps = {
+  chat: Chat
+} & typeof mapDispatchToProps
 
 class ChatListItem extends React.Component<ChatListItemProps> {
   render() {
-    const { chat } = this.props
+    const { chat, routeToChat } = this.props
     return (
-      <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => routeToChat(chat)}
+      >
         <View style={styles.image}>
-          <ProfileImage size={40} />
+          <ProfileImage size={50} />
         </View>
         <View style={styles.description}>
           <Text style={styles.contact}>{chat.participants[0]}</Text>
@@ -27,7 +38,7 @@ class ChatListItem extends React.Component<ChatListItemProps> {
             </Text>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     )
   }
 }
@@ -42,7 +53,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   contact: {
-    fontWeight: '600',
+    fontWeight: '700',
+    fontSize: 17,
   },
   image: {
     paddingRight: 10,
@@ -57,4 +69,7 @@ const styles = StyleSheet.create({
   lastMessage: {},
 })
 
-export default ChatListItem
+export default connect(
+  null,
+  mapDispatchToProps
+)(ChatListItem)
