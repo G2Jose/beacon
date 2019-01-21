@@ -5,7 +5,6 @@ import {
   ViewStyle,
   StyleProp,
   View,
-  Button,
   TouchableOpacity,
   Text,
 } from 'react-native'

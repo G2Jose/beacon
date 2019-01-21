@@ -27,7 +27,7 @@ class ChatScreen extends React.Component<ChatScreenProps> {
     return [...this.props.chat.messages, 'input']
   }
 
-  renderItem = (item: MessageType | 'input') => {
+  renderItem = (item: MessageType & { ours: boolean } | 'input') => {
     if (item === 'input') {
       return (
         <MessageInput

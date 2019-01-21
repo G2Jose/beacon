@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "lint": "npm run lint:eslint && npm run lint:formatting && npm run lint:types",
+    "lint": "status=0; npm run lint:eslint || status=1; npm run lint:formatting || status=1; npm run lint:types || status=1; exit $status",
     "lint:eslint": "eslint \"**/*.js\" \"**/*.ts\" \"**/*.tsx\"",
     "lint:formatting": "prettier-eslint \"src/**/*.js\" \"src/**/*.ts\" \"src/**/*.tsx\" --list-different",
     "lint:types": "tsc --noEmit",
