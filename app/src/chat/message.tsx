@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import { DimensionsContext } from '~/LayoutAwareApp'
 
 type Props = {
   message: string
@@ -7,11 +8,21 @@ type Props = {
 }
 
 const Message = ({ message, ours = true }: Props) => (
-  <View style={[styles.cell, ours && styles.ourCell]}>
-    <View style={[styles.bubble, ours && styles.ourBubble]}>
-      <Text style={[styles.text, ours && styles.ourText]}>{message}</Text>
-    </View>
-  </View>
+  <DimensionsContext.Consumer>
+    {dimensions => (
+      <View style={[styles.cell, ours && styles.ourCell]}>
+        <View
+          style={[
+            dimensions && { width: dimensions.width * 0.9 },
+            styles.bubble,
+            ours && styles.ourBubble,
+          ]}
+        >
+          <Text style={[styles.text, ours && styles.ourText]}>{message}</Text>
+        </View>
+      </View>
+    )}
+  </DimensionsContext.Consumer>
 )
 
 const styles = StyleSheet.create({
@@ -22,7 +33,6 @@ const styles = StyleSheet.create({
   },
   ourCell: { alignItems: 'flex-end' },
   bubble: {
-    width: 300,
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 7,
