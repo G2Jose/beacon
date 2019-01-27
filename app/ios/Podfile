@@ -1,0 +1,5 @@
+workspace 'Beacon'
+
+target 'beacon' do
+  pod 'GoogleSignIn'
+end
