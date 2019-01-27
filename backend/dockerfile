@@ -1,5 +1,0 @@
-FROM elixir:1.7.3-alpine
-ADD . /backend
-WORKDIR /backend
-
-CMD /bin/sh

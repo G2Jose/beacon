@@ -1,16 +1,39 @@
-# App artifacts
-/_build
-/db
-/deps
-/*.ez
-
-# Generated on crash by the VM
-erl_crash.dump
-
-# Files matching config/*.secret.exs pattern contain sensitive
-# data and you should not commit them into version control.
-#
-# Alternatively, you may comment the line below and commit the
-# secrets files as long as you replace their contents by environment
-# variables.
-/config/*.secret.exs
+/.bundle
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+/storage/*
+!/storage/.keep
+/node_modules
+/yarn-error.log
+/public/assets
+.byebug_history
+/config/master.key
+*.rbc
+capybara-*.html
+.rspec
+/log
+/tmp
+/public/system
+/coverage/
+/spec/tmp
+*.orig
+rerun.txt
+pickle-email-*.html
+config/initializers/secret_token.rb
+config/master.key
+.env
+/vendor/bundle
+.rvmrc
+/vendor/assets/bower_components
+*.bowerrc
+bower.json
+.powenv
+node_modules/
+/public/packs
+/public/packs-test
+yarn-debug.log*
+.yarn-integrity
