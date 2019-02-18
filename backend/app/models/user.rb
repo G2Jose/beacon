@@ -1,10 +1,11 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: users
 #
 #  id               :integer          not null, primary key
+#  email            :string
+#  image            :string
 #  name             :string
 #  oauth_expires_at :datetime
 #  oauth_token      :string
@@ -22,6 +23,8 @@ class User < ApplicationRecord
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth.info.name
+      user.email = auth.info.email
+      user.image = auth.info.image
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save!

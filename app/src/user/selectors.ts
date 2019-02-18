@@ -13,5 +13,5 @@ export const getProfileImageUrl = createSelector(getUser, user => {
   if (!user) {
     return ''
   }
-  return user.photo
+  return user.image
 })

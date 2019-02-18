@@ -1,8 +1,10 @@
 export type User = {
-  accessToken: string
-  accessTokenExpirationDate: number
+  id: string
   email: string
-  givenName: string
-  familyName: string
-  photo: string
+  image: string
+  name: string
+  oauthToken: string
+  oauthExpiresAt: string
+  provider: string
+  uid: string
 }

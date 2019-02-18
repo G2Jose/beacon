@@ -1,25 +1,24 @@
 // eslint-disable-next-line
-import { User } from 'react-native-google-signin'
+
+import { camelCase, mapKeys } from 'lodash'
 
 export const actionTypes = {
   USER_SET: 'USER_SET',
 }
 
-type SetUserParams = User
-export const setUser = (payload: SetUserParams) => {
-  const {
-    accessToken,
-    accessTokenExpirationDate,
-    serverAuthCode,
-    idToken,
-  } = payload
-  const user = {
-    ...payload.user,
-    accessToken,
-    accessTokenExpirationDate,
-    serverAuthCode,
-    idToken,
-  }
+type UserPayload = {
+  id: string
+  email: string
+  image: string
+  name: string
+  oauth_token: string
+  oauth_expires_at: string
+  provider: string
+  uid: string
+}
+export const setUser = (payload: UserPayload) => {
+  const user = mapKeys(payload, (v, k) => camelCase(k))
+
   return {
     type: actionTypes.USER_SET,
     payload: user,

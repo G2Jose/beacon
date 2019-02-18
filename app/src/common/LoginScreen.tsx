@@ -54,9 +54,11 @@ class LoginScreen extends React.Component<Props> {
         }
       )
 
+      const user = await result.json()
+
       if (result.status === 200) {
         this.props.routeTo('ChatListScreen')
-        this.props.setUser(userInfo)
+        this.props.setUser(user)
       } else {
         this.setState({ signingIn: false })
       }

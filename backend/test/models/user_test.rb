@@ -1,10 +1,11 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: users
 #
 #  id               :integer          not null, primary key
+#  email            :string
+#  image            :string
 #  name             :string
 #  oauth_expires_at :datetime
 #  oauth_token      :string
