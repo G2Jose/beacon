@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import { routeTo } from '~/navigation/actions'
 import { setUser } from '~/user/actions'
 import { View } from 'react-native'
+import { GoogleSignInConfig } from './utils'
 
 const mapDispatchToProps = {
   routeTo,
@@ -18,18 +19,47 @@ class LoginScreen extends React.Component<Props> {
   state = { signingIn: false }
 
   componentDidMount() {
-    GoogleSignin.configure()
+    GoogleSignin.configure(GoogleSignInConfig)
+  }
+
+  signOut = async () => {
+    try {
+      await GoogleSignin.signOut()
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   signIn = async () => {
+    await this.signOut()
     this.setState({ signingIn: true })
     try {
       await GoogleSignin.hasPlayServices()
       const userInfo = await GoogleSignin.signIn()
 
-      this.setState({ signingIn: false })
-      this.props.routeTo('ChatListScreen')
-      this.props.setUser(userInfo)
+      const callbackPayload = {
+        ...userInfo,
+        code: userInfo.serverAuthCode,
+      }
+      const result = await fetch(
+        `http://localhost:3000/users/auth/google_oauth2/callback?redirect_uri=&code=${
+          userInfo.serverAuthCode
+        }`,
+        {
+          method: 'POST',
+          body: JSON.stringify(callbackPayload),
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+          },
+        }
+      )
+
+      if (result.status === 200) {
+        this.props.routeTo('ChatListScreen')
+        this.props.setUser(userInfo)
+      } else {
+        this.setState({ signingIn: false })
+      }
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow

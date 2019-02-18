@@ -119,3 +119,7 @@ fastlane/test_output
 iOSInjectionProject/
 
 ios/GoogleService-Info.plist
+
+.env
+.env.js
+.jest

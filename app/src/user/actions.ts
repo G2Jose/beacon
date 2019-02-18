@@ -7,11 +7,18 @@ export const actionTypes = {
 
 type SetUserParams = User
 export const setUser = (payload: SetUserParams) => {
-  const { accessToken, accessTokenExpirationDate } = payload
+  const {
+    accessToken,
+    accessTokenExpirationDate,
+    serverAuthCode,
+    idToken,
+  } = payload
   const user = {
     ...payload.user,
     accessToken,
     accessTokenExpirationDate,
+    serverAuthCode,
+    idToken,
   }
   return {
     type: actionTypes.USER_SET,

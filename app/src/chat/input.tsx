@@ -35,6 +35,9 @@ export default class MessageInput extends Component<Props> {
           onChangeText={text => this.setState({ text })}
           value={this.state.text}
           onFocus={onFocus}
+          returnKeyType="send"
+          onSubmitEditing={this.onPress}
+          blurOnSubmit={false}
         />
         {this.state.text ? (
           <TouchableOpacity onPress={this.onPress}>

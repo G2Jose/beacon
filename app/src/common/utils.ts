@@ -1,4 +1,5 @@
 import { Dimensions, Platform, ScaledSize } from 'react-native'
+import { webClientId } from '../../.env.js'
 
 export function isIPhoneXSize(dim: ScaledSize) {
   return dim.height == 812 || dim.width == 812
@@ -14,3 +15,8 @@ export function isIPhoneXrSize(dim: ScaledSize) {
 }
 
 export const HEADER_SIZE = isIphoneX() ? 130 : 100
+
+export const GoogleSignInConfig = {
+  webClientId,
+  offlineAccess: true,
+}

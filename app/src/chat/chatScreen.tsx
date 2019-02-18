@@ -70,7 +70,7 @@ class ChatScreen extends React.Component<ChatScreenProps> {
 const styles = StyleSheet.create({
   container: { paddingHorizontal: 10, marginBottom: 15 },
   containerIPhoneX: { marginBottom: 25 },
-  input: { marginTop: 10, marginBottom: 10 },
+  input: { marginTop: 10, marginBottom: 10, paddingBottom: 10 },
 })
 
 export default connect(mapStateToProps)(ChatScreen)
