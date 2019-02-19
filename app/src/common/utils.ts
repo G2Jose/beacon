@@ -1,6 +1,7 @@
 import { Dimensions, Platform, ScaledSize } from 'react-native'
-// eslint-disable-next-line import/no-unresolved, no-restricted-imports
-import { webClientId } from '../../.env.js'
+
+// @ts-ignore
+import { webClientId } from '../../.env.js' // eslint-disable-line import/no-unresolved, no-restricted-imports
 
 export function isIPhoneXSize(dim: ScaledSize) {
   return dim.height == 812 || dim.width == 812
