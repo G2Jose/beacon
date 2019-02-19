@@ -2,4 +2,6 @@ workspace 'Beacon'
 
 target 'beacon' do
   pod 'GoogleSignIn'
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
 end

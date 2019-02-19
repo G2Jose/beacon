@@ -1,4 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web and AsyncStorage for react-native
+
 import rootReducer from '~/store/reducer'
 import middleware from '~/store/middleware'
 
@@ -9,6 +12,11 @@ if (global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
 
 const enhancer = composeEnhancers(applyMiddleware(...middleware))
 
-const store = createStore(rootReducer, enhancer)
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-export default store
+export const store = createStore(persistedReducer, enhancer)
+export const persistor = persistStore(store)

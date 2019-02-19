@@ -7,7 +7,7 @@ import ChatScreen from '~/chat/chatScreen'
 import constants from '~/common/constants'
 import { ReduxState } from '~/store/types'
 import createNavigationMiddleware from '~/navigation/middleware'
-import { ViewStyle, StyleProp, StyleSheet } from 'react-native'
+import { ViewStyle, StyleProp, StyleSheet, Text } from 'react-native'
 import { Route } from './types'
 import LoginScreen from '~/common/LoginScreen'
 import UserImage from '~/user/UserImage'
@@ -37,6 +37,7 @@ export const routes = {
     navigationOptions: () => ({
       title: constants.appName,
       headerLeft: <UserImage size={35} style={styles.userImage} />,
+      headerRight: <Text>📝</Text>,
     }),
   },
   ChatScreen: {

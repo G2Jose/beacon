@@ -2,6 +2,7 @@ import {
   GoogleSignin,
   GoogleSigninButton,
   statusCodes,
+  User,
 } from 'react-native-google-signin'
 import React from 'react'
 import { connect } from 'react-redux'
@@ -20,6 +21,15 @@ class LoginScreen extends React.Component<Props> {
 
   componentDidMount() {
     GoogleSignin.configure(GoogleSignInConfig)
+    this.attemptSilentSignIn()
+  }
+
+  attemptSilentSignIn = async () => {
+    const isSignedIn = await GoogleSignin.isSignedIn()
+    if (isSignedIn) {
+      const userInfo = await GoogleSignin.signInSilently()
+      this.handlePostSignIn(userInfo)
+    }
   }
 
   signOut = async () => {
@@ -36,32 +46,7 @@ class LoginScreen extends React.Component<Props> {
     try {
       await GoogleSignin.hasPlayServices()
       const userInfo = await GoogleSignin.signIn()
-
-      const callbackPayload = {
-        ...userInfo,
-        code: userInfo.serverAuthCode,
-      }
-      const result = await fetch(
-        `http://localhost:3000/users/auth/google_oauth2/callback?redirect_uri=&code=${
-          userInfo.serverAuthCode
-        }`,
-        {
-          method: 'POST',
-          body: JSON.stringify(callbackPayload),
-          headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-          },
-        }
-      )
-
-      const user = await result.json()
-
-      if (result.status === 200) {
-        this.props.routeTo('ChatListScreen')
-        this.props.setUser(user)
-      } else {
-        this.setState({ signingIn: false })
-      }
+      this.handlePostSignIn(userInfo)
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
@@ -73,6 +58,33 @@ class LoginScreen extends React.Component<Props> {
         // some other error happened
       }
     }
+  }
+
+  handlePostSignIn = async (userInfo: User) => {
+    if (!userInfo.serverAuthCode) {
+      return null
+    }
+    const result = await fetch(
+      `http://localhost:3000/users/auth/google_oauth2/callback?redirect_uri=&code=${
+        userInfo.serverAuthCode
+      }`,
+      {
+        method: 'POST',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+        },
+      }
+    )
+
+    const user = await result.json()
+
+    if (result.status === 200) {
+      this.props.routeTo('ChatListScreen')
+      this.props.setUser(user)
+    } else {
+      this.setState({ signingIn: false })
+    }
+    return null
   }
 
   render() {
