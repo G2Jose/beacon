@@ -6,8 +6,8 @@ import {
   StyleProp,
   View,
   TouchableOpacity,
-  Text,
 } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 interface Props {
   style?: StyleProp<ViewStyle>
@@ -41,7 +41,7 @@ export default class MessageInput extends Component<Props> {
         />
         {this.state.text ? (
           <TouchableOpacity onPress={this.onPress}>
-            <Text style={styles.icon}>✉️</Text>
+            <Icon name="paper-plane" size={23} style={styles.icon} />
           </TouchableOpacity>
         ) : null}
       </View>
@@ -65,5 +65,5 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 7,
   },
-  icon: { fontSize: 30, paddingRight: 10 },
+  icon: { paddingRight: 10 },
 })

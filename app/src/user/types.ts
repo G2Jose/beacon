@@ -8,3 +8,10 @@ export type User = {
   provider: string
   uid: string
 }
+
+export type Contact = {
+  id: string
+  email: string
+  image: string
+  name: string
+}

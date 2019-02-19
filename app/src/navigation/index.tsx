@@ -7,10 +7,14 @@ import ChatScreen from '~/chat/chatScreen'
 import constants from '~/common/constants'
 import { ReduxState } from '~/store/types'
 import createNavigationMiddleware from '~/navigation/middleware'
-import { ViewStyle, StyleProp, StyleSheet, Text } from 'react-native'
+import { ViewStyle, StyleProp, StyleSheet } from 'react-native'
 import { Route } from './types'
 import LoginScreen from '~/common/LoginScreen'
 import UserImage from '~/user/UserImage'
+import contactsScreen from '~/contacts/contactsScreen'
+import NewChatButton from '~/chat/components/newChatButton'
+import NewContactButton from '~/contacts/components/newContactButton'
+import NewContactScreen from '~/contacts/newContactScreen'
 
 type Options = {
   initialRouteName: Route
@@ -28,7 +32,7 @@ const options: Options = {
 }
 
 const styles = StyleSheet.create({
-  userImage: { marginLeft: 10 },
+  headerImage: { marginHorizontal: 10 },
 })
 
 export const routes = {
@@ -36,8 +40,8 @@ export const routes = {
     screen: ChatListScreen,
     navigationOptions: () => ({
       title: constants.appName,
-      headerLeft: <UserImage size={35} style={styles.userImage} />,
-      headerRight: <Text>📝</Text>,
+      headerLeft: <UserImage size={35} style={styles.headerImage} />,
+      headerRight: <NewChatButton />,
     }),
   },
   ChatScreen: {
@@ -49,6 +53,20 @@ export const routes = {
   LoginScreen: {
     screen: LoginScreen,
     navigationOptions: () => ({ title: 'Sign in' }),
+  },
+
+  ContactsScreen: {
+    screen: contactsScreen,
+    navigationOptions: () => ({
+      title: 'Contacts',
+      headerRight: <NewContactButton />,
+    }),
+  },
+  NewContactScreen: {
+    screen: NewContactScreen,
+    navigationOptions: () => ({
+      title: 'Add contact',
+    }),
   },
 }
 

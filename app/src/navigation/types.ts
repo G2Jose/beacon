@@ -9,6 +9,7 @@ interface RouteState {
   routeName: Route
   key: string
 }
+
 export type NavigationState = {
   key: string
   isTransitionining: boolean

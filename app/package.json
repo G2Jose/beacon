@@ -14,6 +14,7 @@
   "dependencies": {
     "@types/jest": "^23.3.5",
     "@types/lodash": "^4.14.121",
+    "@types/react-native-vector-icons": "^4.6.4",
     "@types/react-redux": "^6.0.9",
     "@types/redux": "^3.6.0",
     "@typescript-eslint/parser": "^0.2.1",

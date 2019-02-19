@@ -1,4 +1,5 @@
 import { Dimensions, Platform, ScaledSize } from 'react-native'
+// eslint-disable-next-line import/no-unresolved, no-restricted-imports
 import { webClientId } from '../../.env.js'
 
 export function isIPhoneXSize(dim: ScaledSize) {
