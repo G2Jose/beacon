@@ -3,7 +3,7 @@
 declare var global: any
 
 interface Action {
-  type: string
+  type: number
   payload: any
 }
 
